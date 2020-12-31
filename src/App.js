@@ -8,6 +8,7 @@ function App() {
 
     const [countries, setCountries]= 
     useState([]);
+    const [country, setCountry]=useState("worldwide");
     // State = how to write a variable in react
 
 
@@ -33,10 +34,15 @@ function App() {
 
         };
         getCountiresData();
+        // setCountry("WorldWide");
 
     },[]);
 
-
+    const onCountryChange = async(event)=>{
+        const countryCode=event.target.value;
+        // console.log(countryCode);
+        setCountry(countryCode);
+    };
 
 
   return (
@@ -45,20 +51,19 @@ function App() {
         <h1>COVID-19 TRACKER</h1>
         <FormControl className="app__dropdown">
         {/* // BEM naming convention in which first is component and second is element */}
-            <Select
-                varient="outlined"
-                value="abc">
+            <Select variant="outlined" onChange={onCountryChange} value={country}>
+                
             
-                {/* {we loop though country and show here} */}
+                {/* {we loop though country and show here} */} 
 
 
-
+                <MenuItem value="worldwide"> Worldwide</MenuItem>
                 {countries.map(country=> (
                         <MenuItem value={country.value}>{country.name}</MenuItem>
                 ))}
 
-                {/* <MenuItem value="worldwide"> Worldwide</MenuItem>
-                <MenuItem value="worldwide"> wide</MenuItem>
+                {/* 
+                <MenuItem value="worldwide"> wide</MenuItem> 
                 <MenuItem value="worldwide"> World</MenuItem>   */}
             </Select>
         </FormControl>
