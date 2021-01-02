@@ -4,7 +4,8 @@ import {MenuItem,FormControl,Select ,Card ,CardContent} from '@material-ui/core'
 //import{MenuItem,FormControl,Select} from "@material_ui/core"
 import InfoBox from './InfoBox'; 
 import Map from './Map';
-
+import Table from './Table';
+import {sortData} from './util';
 function App() {
      
                     
@@ -12,6 +13,7 @@ function App() {
     useState([]);
     const [country, setCountry]=useState("worldwide");
     const [countryInfo, setCountryInfo]=useState([]);
+    const [tableData, setTableData]=useState([]);
     //State = how to write a variable in react
 
 
@@ -43,6 +45,9 @@ function App() {
                     name: country.country,
                     value: country.countryInfo.iso2
                 }));
+                // sort data in decending order by cases
+                const sortedData = sortData(data);
+                setTableData(sortedData);
                 setCountries(countries);
             });
 
@@ -135,11 +140,12 @@ function App() {
                 <CardContent>
                     {/* {Table} */}
                     <h3> Live cases by Country</h3>
+                    <Table countries={tableData}/>
                     {/* {Graph} */}
                     <h3>Worldwide new cases</h3>
                 </CardContent>
                 
-        
+         
      
      
 
