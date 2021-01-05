@@ -6,6 +6,10 @@ import InfoBox from './InfoBox';
 import Map from './Map';
 import Table from './Table';
 import {sortData} from './util';
+import LineGraph from './LineGraph';
+// import "leaflet/dis/leaflet.css"
+import "leaflet/dist/leaflet.css";
+
 function App() {
      
                     
@@ -14,6 +18,8 @@ function App() {
     const [country, setCountry]=useState("worldwide");
     const [countryInfo, setCountryInfo]=useState([]);
     const [tableData, setTableData]=useState([]);
+    const [mapCenter, setMapCenter] = useState({ lat: 20.5937 , lng: 78.9629 });
+    const [mapZoom, setMapZoom] = useState(3);
     //State = how to write a variable in react
 
 
@@ -74,6 +80,10 @@ function App() {
 
             setCountryInfo(data);
 
+            setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+            console.log("change>>>>>>>>" , mapCenter ,data);
+            setMapZoom(5);
+
 
         });
 
@@ -117,7 +127,7 @@ function App() {
     <div className="app__stats">
 
                 <InfoBox title="Coronavirus Cases" cases={countryInfo.todayCases} total={countryInfo.cases}/>
-                <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered}/> />
+                <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered}/> 
                 <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
                 
     
@@ -132,7 +142,10 @@ function App() {
 
 
      {/* {Map} */}
-     <Map />
+     <Map
+        center={mapCenter}
+        zoom={mapZoom}
+      />
 
 
     </div>
@@ -142,6 +155,7 @@ function App() {
                     <h3> Live cases by Country</h3>
                     <Table countries={tableData}/>
                     {/* {Graph} */}
+                    <LineGraph />
                     <h3>Worldwide new cases</h3>
                 </CardContent>
                 
