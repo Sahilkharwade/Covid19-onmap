@@ -20,9 +20,21 @@ body {
   /* this helps to give 90% of space to app__left */
   flex: 0.9;
 }
+
 .app__stats {
   display: flex;
   justify-content: space-between;
+}
+
+.app_Graphtitle {
+  margin-top: 25px;
+  margin-bottom: 50px;
+  margin-left: 20px;
+  color: red;
+  /* padding-top: 1005px; */
+}
+.app__Graph {
+  padding-top: 100px;
 }
 /* when it goes below 990 px then we change flex row to column  */
 /* for responsive design */

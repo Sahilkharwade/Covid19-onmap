@@ -100,6 +100,7 @@ function App() {
         <h1>COVID-19 TRACKER</h1>
         <FormControl className="app__dropdown">
         {/* // BEM naming convention in which first is component and second is element */}
+        {/* Component With A Modifier if we use app--dropdown   */}
             <Select variant="outlined" onChange={onCountryChange} value={country}>
                 
             
@@ -128,23 +129,26 @@ function App() {
 
     <div className="app__stats">
 
-                <InfoBox title="Coronavirus Cases" cases={prettyPrintStat(countryInfo.todayCases)} total={prettyPrintStat(countryInfo.cases)}/>
-                <InfoBox title="Recovered" cases={prettyPrintStat(countryInfo.todayRecovered)} total={prettyPrintStat(countryInfo.recovered)}/> 
-                <InfoBox title="Deaths" cases={prettyPrintStat(countryInfo.todayDeaths)} total={prettyPrintStat(countryInfo.deaths)} />
+                <InfoBox isRed active={casesType === "cases"} onClick={(e) => setCasesType("cases")} title="Coronavirus Cases" cases={prettyPrintStat(countryInfo.todayCases)} total={prettyPrintStat(countryInfo.cases)}/>
+                <InfoBox active={casesType === "recovered"} onClick={(e) => setCasesType("recovered")} title="Recovered" cases={prettyPrintStat(countryInfo.todayRecovered)} total={prettyPrintStat(countryInfo.recovered)}/> 
+                <InfoBox isRed active={casesType === "deaths"} onClick={(e) => setCasesType("deaths")} title="Deaths" cases={prettyPrintStat(countryInfo.todayDeaths)} total={prettyPrintStat(countryInfo.deaths)} />
                 
     
-                {/* {Info Boxs} */}
-                {/* {Info Boxs} */}
+                { /* {Info Boxs} */ }
+                { /* {Info Boxs} */ }
                 {/* {Info Boxs} */}
 
 
     </div>
-      
+           
+
+                
 
 
 
      {/* {Map} */}
      <Map
+        casesType={casesType}
         countries={mapCountries}
         center={mapCenter}
         zoom={mapZoom}
@@ -153,13 +157,14 @@ function App() {
 
     </div>
     <Card className="app__right">
-                <CardContent>
+                <CardContent >
                     {/* {Table} */}
                     <h3> Live cases by Country</h3>
                     <Table countries={tableData}/>
                     {/* {Graph} */}
-                    <LineGraph />
-                    <h3>Worldwide new cases</h3>
+                    <h3 className="app_Graphtitle">Worldwide new {casesType}</h3>
+                    <LineGraph className="app__Graph" casesType={casesType} />
+                   
                 </CardContent>
                 
          
