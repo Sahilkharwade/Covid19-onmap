@@ -8,10 +8,12 @@
 }
 
 .infoBox--selected {
+  
   border-top: 10px solid greenyellow;
 }
 
 .infoBox--red {
+  /* background-image: linear-gradient(to left, #d5def0, #dbe3f1, #e1e8f2, #e8edf3, #f0f2f4); */
   border-color: red;
 }
 

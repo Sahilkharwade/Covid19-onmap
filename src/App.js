@@ -71,7 +71,7 @@ function App() {
         // console.log(countryCode);
         // setCountry(countryCode);
 
-        const url = countryCode ==='worldwide' ? "https://disease.sh/v3/covid-19/all" :
+        const url = countryCode ==="worldwide" ? "https://disease.sh/v3/covid-19/all" :
         `https://disease.sh/v3/covid-19/countries/${countryCode}`;
         // {/* for world wide date the is diffrent api call so for that we use if else */}
         // https://disease.sh/v3/covid-19/all  that gives worldwide data 
@@ -80,10 +80,15 @@ function App() {
         await fetch(url).then(response => response.json()).then(data=>{
             setCountry(countryCode);
 
+            if(countryCode ==="worldwide")
+                setMapCenter({ lat: 20.5937 , lng: 78.9629 })
+            else
+            setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+             
             setCountryInfo(data);
 
-            setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-            console.log("change>>>>>>>>" , mapCenter ,data);
+            
+            // console.log("change>>>>>>>>" , mapCenter ,data);
             setMapZoom(5);
 
 
